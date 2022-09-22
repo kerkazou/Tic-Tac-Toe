@@ -116,14 +116,14 @@ function whWinner(){
                 let winplayer_2 = localStorage.getItem("win_player_2");
                 localStorage.setItem("win_player_2", ++winplayer_2);
                 win_player_2.innerHTML = localStorage.getItem("win_player_2");
+        }else{
+            if((localStorage.getItem('a') == 9) && (localStorage.getItem('winner') == 0)){
+                localStorage.setItem('winner', 'No one');
+                msgWinner('No one');
+            }
         }
     }
-    else{
-        if((localStorage.getItem('a') == 9) && (localStorage.getItem('winner') == '')){
-            localStorage.setItem('winner', 'No one');
-            msgWinner('No one');
-        }
-    }
+    else{}
 }
 
 
@@ -192,7 +192,6 @@ function reset() {
     win_player_2.innerHTML = localStorage.getItem("win_player_2");
     selectPlayer();
     btnAnotherMatch();
-    console.log(localStorage);
 }
 
 function selectPlayer(){
