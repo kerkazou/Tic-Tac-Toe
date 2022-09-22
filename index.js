@@ -8,6 +8,11 @@ localStorage.setItem('win_player_1', 0);
 localStorage.setItem('win_player_2', 0);
 localStorage.setItem('No one', 'No one');
 
+const TicSound = new Audio('assets/audio/Tic.mp3');
+const TacSound = new Audio('assets/audio/Tac.mp3');
+const WinSound = new Audio('assets/audio/Win.mp3');
+const audioSound = new Audio('assets/audio/audio.mp3');
+
 const win = document.getElementById('win');
 const player_win = document.getElementById('player_win');
 const home = document.getElementById('home');
@@ -38,6 +43,7 @@ function Start(){
     }
 
     if((player1.value != "") && (player2.value != "")){
+        audioSound.play();
         document.querySelector('.btn-close').click();
         
         localStorage.setItem('player_1' , player1.value);
@@ -62,12 +68,14 @@ function chose(p) {
         localStorage.setItem("a", ++a);
         if(checkPlayer(localStorage.getItem("a"))){
             document.getElementById(p).innerHTML = '<i class="bi bi-x-lg" style="color: #D21BEF;"></i>';
+            TicSound.play();
             player_1.style.backgroundColor = "#EFEC1B";
             player_2.style.backgroundColor = null;
             localStorage.setItem(p , "x");
             whWinner();
         }else{
             document.getElementById(p).innerHTML = '<i class="bi bi-circle" style="color: #64F014;"></i>';
+            TacSound.play();
             player_2.style.backgroundColor = "#EFEC1B";
             player_1.style.backgroundColor = null;
             localStorage.setItem(p , "o");
@@ -132,11 +140,14 @@ function msgWinner(player){
         win.style.display = "flex";
         play.style.display = "none";
         player_win.innerHTML = localStorage.getItem(player);
+        audioSound.pause();
+        WinSound.play();
     }, 1000);
 }
 
 
 function anotherMatch(){
+    audioSound.play();
     p1.innerHTML = "";
     p2.innerHTML = "";
     p3.innerHTML = "";
@@ -166,6 +177,7 @@ function anotherMatch(){
 
 
 function reset() {
+    audioSound.play();
     p1.innerHTML = "";
     p2.innerHTML = "";
     p3.innerHTML = "";
