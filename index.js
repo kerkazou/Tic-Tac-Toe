@@ -73,7 +73,6 @@ function chose(p) {
             localStorage.setItem(p , "o");
             whWinner();
         }
-        console.log(localStorage);
     }
 }
 
@@ -88,6 +87,7 @@ function checkPlayer(player){
 
 function whWinner(){
     btnAnotherMatch();
+    selectPlayer();
     if((localStorage.getItem('a') >= 1) && (localStorage.getItem('a') <= 9)){
         if( ((localStorage.getItem('p1') == 'o') && (localStorage.getItem('p2') == 'o') && (localStorage.getItem('p3') == 'o')) ||
             ((localStorage.getItem('p4') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p6') == 'o')) ||
@@ -114,7 +114,7 @@ function whWinner(){
                 localStorage.setItem('winner', 'player_2');
                 msgWinner('player_2');
                 let winplayer_2 = localStorage.getItem("win_player_2");
-                localStorage.setItem("win_player_1", ++winplayer_2);
+                localStorage.setItem("win_player_2", ++winplayer_2);
                 win_player_2.innerHTML = localStorage.getItem("win_player_2");
         }
     }
@@ -197,12 +197,12 @@ function reset() {
 
 function selectPlayer(){
     if(checkPlayer(a)){
-        player_2.style.backgroundColor = "#EFEC1B";
-        player_1.style.backgroundColor = null;
-    }
-    else{
         player_1.style.backgroundColor = "#EFEC1B";
         player_2.style.backgroundColor = null;
+    }
+    else{
+        player_2.style.backgroundColor = "#EFEC1B";
+        player_1.style.backgroundColor = null;
     }
 }
 
