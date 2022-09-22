@@ -187,7 +187,7 @@ function reset() {
     localStorage.removeItem('p9');
     localStorage.setItem('winner', 0);
     localStorage.setItem('win_player_1', 0);
-    localStorage.setItem('win_player_1', 0);
+    localStorage.setItem('win_player_2', 0);
     win_player_1.innerHTML = localStorage.getItem("win_player_1");
     win_player_2.innerHTML = localStorage.getItem("win_player_2");
     selectPlayer();
