@@ -87,12 +87,15 @@ body #play{
 	align-items: center;
     color: white;
 }
-body #play #back, #another_match, #reset{
+body #play div #back, div  .another_match, div  #reset{
 	height: 40px;
 	width: 100px;
 	border-radius: 16px;
 	border: none;
 	background: linear-gradient(0.25turn, #64F014, #D21BEF);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 body #play #game{
 	display: flex;

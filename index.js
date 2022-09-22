@@ -6,6 +6,7 @@ localStorage.setItem('a', 0);
 localStorage.setItem('winner', 0);
 localStorage.setItem('win_player_1', 0);
 localStorage.setItem('win_player_2', 0);
+localStorage.setItem('No one', 'No one');
 
 const win = document.getElementById('win');
 const player_win = document.getElementById('player_win');
@@ -15,14 +16,14 @@ const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
 const player_1 = document.querySelector('#player_1');
 const player_2 = document.querySelector('#player_2');
-const another_match = document.querySelector('#another_match');
+const another_match = document.querySelector('#another');
 const name_player_1 = document.querySelector('.name_player_1');
 const name_player_2 = document.querySelector('.name_player_2');
 const win_player_1 = document.querySelector('.win_player_1');
 const win_player_2 = document.querySelector('.win_player_2');
 
-btnAnotherMatch();
 win.style.display = "none";
+btnAnotherMatch();
 
 function Start(){
     if(player1.value == ""){
@@ -42,7 +43,8 @@ function Start(){
         localStorage.setItem('player_1' , player1.value);
         localStorage.setItem('player_2' , player2.value);
 
-        selectPlayer();
+        player_1.style.backgroundColor = "#EFEC1B";
+        player_2.style.backgroundColor = null;
         
         name_player_1.innerHTML = localStorage.getItem('player_1');
         name_player_2.innerHTML = localStorage.getItem('player_2');
@@ -71,6 +73,7 @@ function chose(p) {
             localStorage.setItem(p , "o");
             whWinner();
         }
+        console.log(localStorage);
     }
 }
 
@@ -83,29 +86,17 @@ function checkPlayer(player){
     }
 }
 
-function selectPlayer(){
-    if((localStorage.getItem('winner') == 'player_2') || checkPlayer(a)){
-        player_2.style.backgroundColor = "#EFEC1B";
-        player_1.style.backgroundColor = null;
-    }
-    else if((localStorage.getItem('winner') == 0 || (localStorage.getItem('winner') == 'player_1'))){
-        player_1.style.backgroundColor = "#EFEC1B";
-        player_2.style.backgroundColor = null;
-    }
-}
-
 function whWinner(){
+    btnAnotherMatch();
     if((localStorage.getItem('a') >= 1) && (localStorage.getItem('a') <= 9)){
-        btnAnotherMatch();
         if( ((localStorage.getItem('p1') == 'o') && (localStorage.getItem('p2') == 'o') && (localStorage.getItem('p3') == 'o')) ||
-            ((localStorage.getItem('p3') == 'o') && (localStorage.getItem('p4') == 'o') && (localStorage.getItem('p5') == 'o')) ||
-            ((localStorage.getItem('p6') == 'o') && (localStorage.getItem('p7') == 'o') && (localStorage.getItem('p8') == 'o')) ||
+            ((localStorage.getItem('p4') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p6') == 'o')) ||
+            ((localStorage.getItem('p7') == 'o') && (localStorage.getItem('p8') == 'o') && (localStorage.getItem('p9') == 'o')) ||
             ((localStorage.getItem('p1') == 'o') && (localStorage.getItem('p4') == 'o') && (localStorage.getItem('p7') == 'o')) ||
-            ((localStorage.getItem('p2') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p6') == 'o')) ||
+            ((localStorage.getItem('p2') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p8') == 'o')) ||
             ((localStorage.getItem('p3') == 'o') && (localStorage.getItem('p6') == 'o') && (localStorage.getItem('p9') == 'o')) ||
             ((localStorage.getItem('p1') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p9') == 'o')) ||
             ((localStorage.getItem('p3') == 'o') && (localStorage.getItem('p5') == 'o') && (localStorage.getItem('p7') == 'o')) ){
-                console.log(localStorage);
                 localStorage.setItem('winner', 'player_1');
                 msgWinner('player_1');
                 let winplayer_1 = localStorage.getItem("win_player_1");
@@ -113,19 +104,24 @@ function whWinner(){
                 win_player_1.innerHTML = localStorage.getItem("win_player_1");
         }
         if( ((localStorage.getItem('p1') == 'x') && (localStorage.getItem('p2') == 'x') && (localStorage.getItem('p3') == 'x')) ||
-            ((localStorage.getItem('p3') == 'x') && (localStorage.getItem('p4') == 'x') && (localStorage.getItem('p5') == 'x')) ||
-            ((localStorage.getItem('p6') == 'x') && (localStorage.getItem('p7') == 'x') && (localStorage.getItem('p8') == 'x')) ||
+            ((localStorage.getItem('p4') == 'x') && (localStorage.getItem('p5') == 'x') && (localStorage.getItem('p6') == 'x')) ||
+            ((localStorage.getItem('p7') == 'x') && (localStorage.getItem('p8') == 'x') && (localStorage.getItem('p9') == 'x')) ||
             ((localStorage.getItem('p1') == 'x') && (localStorage.getItem('p4') == 'x') && (localStorage.getItem('p7') == 'x')) ||
-            ((localStorage.getItem('p2') == 'x') && (localStorage.getItem('p5') == 'x') && (localStorage.getItem('p6') == 'x')) ||
+            ((localStorage.getItem('p2') == 'x') && (localStorage.getItem('p5') == 'x') && (localStorage.getItem('p8') == 'x')) ||
             ((localStorage.getItem('p3') == 'x') && (localStorage.getItem('p6') == 'x') && (localStorage.getItem('p9') == 'x')) ||
             ((localStorage.getItem('p1') == 'x') && (localStorage.getItem('p5') == 'x') && (localStorage.getItem('p9') == 'x')) ||
             ((localStorage.getItem('p3') == 'x') && (localStorage.getItem('p5') == 'x') && (localStorage.getItem('p7') == 'x')) ){
-                console.log(localStorage);
                 localStorage.setItem('winner', 'player_2');
                 msgWinner('player_2');
                 let winplayer_2 = localStorage.getItem("win_player_2");
                 localStorage.setItem("win_player_1", ++winplayer_2);
                 win_player_2.innerHTML = localStorage.getItem("win_player_2");
+        }
+    }
+    else{
+        if((localStorage.getItem('a') == 9) && (localStorage.getItem('winner') == '')){
+            localStorage.setItem('winner', 'No one');
+            msgWinner('No one');
         }
     }
 }
@@ -136,7 +132,7 @@ function msgWinner(player){
         win.style.display = "flex";
         play.style.display = "none";
         player_win.innerHTML = localStorage.getItem(player);
-    }, 4);
+    }, 1000);
 }
 
 
@@ -162,16 +158,10 @@ function anotherMatch(){
     localStorage.removeItem('p9');
     localStorage.setItem('winner', 0);
     win.style.display = "none";
+    play.style.display = "flex";
     selectPlayer();
     btnAnotherMatch();
-}
-
-function btnAnotherMatch(){
-    if(localStorage.getItem('a') >= 1){
-        another_match.style.display = 'block';
-    }else{
-        another_match.style.display = 'none';
-    }
+    console.log(localStorage);
 }
 
 
@@ -185,6 +175,7 @@ function reset() {
     p7.innerHTML = "";
     p8.innerHTML = "";
     p9.innerHTML = "";
+    localStorage.setItem('a', 0);
     localStorage.removeItem('p1');
     localStorage.removeItem('p2');
     localStorage.removeItem('p3');
@@ -194,14 +185,33 @@ function reset() {
     localStorage.removeItem('p7');
     localStorage.removeItem('p8');
     localStorage.removeItem('p9');
-    localStorage.setItem('a', 0);
     localStorage.setItem('winner', 0);
     localStorage.setItem('win_player_1', 0);
     localStorage.setItem('win_player_1', 0);
     win_player_1.innerHTML = localStorage.getItem("win_player_1");
     win_player_2.innerHTML = localStorage.getItem("win_player_2");
     selectPlayer();
-    btnAnotherMatch()
+    btnAnotherMatch();
+    console.log(localStorage);
+}
+
+function selectPlayer(){
+    if(checkPlayer(a)){
+        player_2.style.backgroundColor = "#EFEC1B";
+        player_1.style.backgroundColor = null;
+    }
+    else{
+        player_1.style.backgroundColor = "#EFEC1B";
+        player_2.style.backgroundColor = null;
+    }
+}
+
+function btnAnotherMatch(){
+    if(localStorage.getItem('a') == 0){
+        another_match.style.display = 'none';
+    }else{
+        another_match.style.display = 'block';
+    }
 }
 
 function back() {
